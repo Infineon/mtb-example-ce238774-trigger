@@ -7,8 +7,8 @@
 #
 ################################################################################
 # \copyright
-# Copyright 2024, Cypress Semiconductor Corporation (an Infineon company)
-# SPDX-License-Identifier: Apache-2.0
+# (c) 2026, Infineon Technologies AG, or an affiliate of Infineon
+# Technologies AG.  SPDX-License-Identifier: Apache-2.0
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ MTB_TYPE=COMBINED
 # To change the target, it is recommended to use the Library manager
 # ('make library-manager' from command line), which will also update Eclipse IDE launch
 # configurations.
-TARGET=KIT_PSC3M5_EVK
+TARGET=KIT_PSC3M6_EVAL
 
 # Name of application (used to derive name of final linked file).
 #
@@ -104,7 +104,7 @@ INCLUDES=
 DEFINES=
 
 # Select softfp, hardfp or softfloat floating point. Default is softfp.
-VFP_SELECT=softfloat
+VFP_SELECT=
 
 # Additional / custom C compiler flags.
 #
@@ -141,6 +141,10 @@ PREBUILD=
 # Custom post-build commands to run.
 POSTBUILD=
 
+ifneq ($(findstring PSC3M6,$(TARGET)),)
+# Config file for postbuild sign, relocate and merge operations.
+COMBINE_SIGN_JSON?=configs/signer_combiner.json
+endif
 
 ################################################################################
 # Paths
@@ -170,7 +174,7 @@ CY_GETLIBS_SHARED_NAME=mtb_shared
 #
 # The default depends on the selected TOOLCHAIN (GCC_ARM uses the ModusToolbox
 # software provided compiler by default).
-CY_COMPILER_GCC_ARM_DIR=
+# CY_COMPILER_GCC_ARM_DIR=
 
 
 # Locate ModusToolbox helper tools folders in default installation
